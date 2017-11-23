@@ -1,0 +1,82 @@
+<div class="container-fluid">
+	<div class="row header">
+		<div id="h1" class="col-md-4">
+			<h1 class="align-middle">Iniciar Sesion</h1>
+		</div>
+		<div class="col-md-4">
+			<i class="icono izquierda fa fa-user"></i><input type="text" class="usuario" id = "rfc" name = "rfc" placeholder=" RFC">	
+		</div>
+		<div class="col-md-4">
+			<i class="icono izquierda fa fa-lock"></i><input type="password" class="password" id = "pass" name = "pass" placeholder=" Contraseña">
+		</div>
+</div>
+<button #myButton (click)="addMyClass()">asdff</button>
+
+<div class="btn-group" dropdown>
+  <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+    Button dropdown <span class="caret"></span>
+  </button>
+  <ul *dropdownMenu class="dropdown-menu" role="menu">
+    <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+    <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+    <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+    <li class="divider dropdown-divider"></li>
+    <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
+    </li>
+  </ul>
+</div>
+
+
+
+
+
+<div class="checkbox">
+  <label>
+    <input type="checkbox"[(ngModel)]="oneAtATime"> 
+    Open only one at a time
+  </label>
+</div>
+ 
+<accordion [closeOthers]="oneAtATime">
+  <accordion-group heading="Header">
+    This content is straight in the template.
+  </accordion-group>
+  <accordion-group heading="Content 1">
+    <p>Content 1</p>
+  </accordion-group>
+  <accordion-group heading="Content 2">
+    <p>Content 2</p>
+  </accordion-group>
+</accordion>
+
+
+
+
+
+
+<!--
+
+	<div class="contenedor-formulario">
+		<h1 class="titulo">Iniciar Sesion</h1>
+		<hr class="border"/>	
+			<form id = "form" class="foru" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" name="login">
+			
+				<div class="input-group">
+					<i class="icono izquierda fa fa-user"></i><input type="text" class="usuario" id = "rfc" name = "rfc" placeholder=" RFC">
+				</div>
+
+				<div class="input-group">
+					<i class="icono izquierda fa fa-lock"></i><input type="password" class="password" id = "pass" name = "pass" placeholder=" Contraseña">
+								
+				</div>
+				
+				<input type="submit" class="botones" value="Acceder" name="login" id="grd" />
+				<input type="submit" class="botones" value="Registrarse" name="registro" />
+				
+			
+									
+		</form>
+	</div>
+-->
+
+
