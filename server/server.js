@@ -23,10 +23,12 @@ app.use(expressJwt({
         }
         return null;
     }
-}).unless({ path: ['/users/authenticate', '/users/register'] }));
+}).unless({ path: ['/users/authenticate', '/users/register', '/users/getLed'] }));
 
 // routes
 app.use('/users', user);
+
+
 
 // start server
 var port = process.env.NODE_ENV === 'production' ? 80 : 4000;

@@ -1,6 +1,8 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
  
+import { User } from '../_models/user';
 import { AlertService, AuthenticationService } from '../_services/index';
  
 @Component({
@@ -10,9 +12,10 @@ import { AlertService, AuthenticationService } from '../_services/index';
 })
  
 export class LoginComponent implements OnInit {
-    model: any = {};
+    model = new User('','','','','','');
     loading = false;
     returnUrl: string;
+    error = false;
  
     constructor(
         private route: ActivatedRoute,
@@ -22,10 +25,16 @@ export class LoginComponent implements OnInit {
  
     ngOnInit() {
         // reset login status
-        this.authenticationService.logout();
+        //this.authenticationService.logout();
  
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        
+    }
+
+    cerrar()
+    {
+        this.error = false;
     }
  
     login() {
@@ -36,8 +45,9 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                    this.alertService.error(error);
+                    //this.alertService.error(error);
                     this.loading = false;
+                    this.error = true;
                 });
     }
 }

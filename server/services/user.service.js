@@ -8,6 +8,9 @@ var db = mongo.db(config.connectionString, { native_parser: true });
 db.bind('users');
  
 var service = {};
+
+
+
  
 service.authenticate = authenticate;
 service.getAll = getAll;
@@ -15,8 +18,19 @@ service.getById = getById;
 service.create = create;
 service.update = update;
 service.delete = _delete;
+
+
+
+
  
 module.exports = service;
+
+
+
+
+
+
+
  
 function authenticate(username, password) {
     var deferred = Q.defer();
@@ -31,6 +45,7 @@ function authenticate(username, password) {
                 username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName,
+                tipo: user.tipo,
                 token: jwt.sign({ sub: user._id }, config.secret)
             });
         } else {
@@ -45,7 +60,7 @@ function authenticate(username, password) {
 function getAll() {
     var deferred = Q.defer();
  
-    db.users.find().toArray(function (err, users) {
+    db.users.find({username: {$ne:"ilaceli"}}).toArray(function (err, users) {
         if (err) deferred.reject(err.name + ': ' + err.message);
  
         // return users (without hashed passwords)

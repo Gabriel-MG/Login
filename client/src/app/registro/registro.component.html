@@ -1,0 +1,152 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-4">
+    <div class="row d-flex justify-content-center">
+        
+		<div class="col-12 col-md-8" *ngIf="!mostrar">
+			<div class="col-12 d-flex justify-content-center mb-4"><h2>Bienvenido {{user.firstName}} {{user.lastName}}</h2></div>
+			
+            <div class="col-12 cuadro mb-5">
+                
+                <div class="col-12 mb-4">
+                    <h5>Estos son los usuarios registrados:</h5>
+                </div>
+                
+                <div class="col-12">
+                    <div class="row d-flex justify-content-between">
+                        <div class="col-12">
+                            <table class="table">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th>Nombre (s)</th>
+                                        <th>Apellidos</th>
+                                        <th>Usuario</th>
+                                        <th *ngIf="tipo==0">Tipo</th>
+                                        <th class="" *ngIf="tipo==0">#</th>
+                                    </tr>
+                                    </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of users">
+                                        <td>{{user.firstName}}</td>
+                                        <td>{{user.lastName}}</td>
+                                        <td>{{user.username}}</td>
+                                        <td *ngIf="tipo==0">{{user.tipo == 0?"Administrador" :"Usuario"}}</td>
+                                        <td *ngIf="tipo==0"><i class="material-icons delete">create</i><i class="ml-3 material-icons delete" (click)="deleteUser(user._id, user.firstName, user.lastName)">remove_circle</i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div *ngIf="tipo==0" class="d-flex justify-content-center mb-4"><i  class="material-icons bnt" (click)="cambiar()">add_circle</i></div>
+
+                        </div>       
+                    </div>
+                </div>	
+                    
+            </div>
+
+		</div>
+        
+
+
+
+
+
+
+
+		<!-- Este de aqui es el cuadro -->
+        <div class="col-md-6 col-10  mb-4" *ngIf="mostrar">
+        	<div class="col-12 d-flex justify-content-center mb-4"><h2>Añadir Usuario</h2></div>
+			<div class="cuadro">
+            <form  name="form" (ngSubmit)="f.form.valid && registro()" #f="ngForm" novalidate>
+				
+				<div class="col-12">
+					<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !firstName.valid }">
+        		    	<label for="firstName">Nombre(s)</label>
+        		    	<input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
+        		    	<div [hidden]="firstName.valid || firstName.pristine" class="mt-2 alert alert-danger">
+                             <i class="material-icons err">error</i> Nombre Requerido
+                        </div>
+        			</div>	
+				</div>
+				 
+        		
+				<div class="col-12">
+					<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !lastName.valid }">
+        		    	<label for="lastName">Apellidos</label>
+        		    	<input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
+        		    	<div [hidden]="lastName.valid || lastName.pristine" class="mt-2 alert alert-danger">
+                            <i class="material-icons err">error</i>Apellidos Requeridos
+                        </div>
+        			</div>	
+				</div>
+
+
+
+
+                <div class="col-12">
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !userState.valid }">
+                        <label for="username">Usuario</label>
+                        <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #userState="ngModel" required />
+                        <div [hidden]="userState.valid || userState.pristine" class="alert alert-danger mt-2">
+                               <i class="material-icons err">error</i> El Usuario es requerido 
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12">
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !passState.valid }">
+                        <label for="password">Contraseña</label>
+                        <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #passState="ngModel" required />
+                        <div [hidden]="passState.valid || passState.pristine" class="mt-2 alert alert-danger">
+                           <i class="material-icons err">error</i> La contraseña es requerida
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+				<div class="col-12">
+					<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password1.valid }">
+        				<label for="password1">Contraseña</label>
+        		    	<input type="password" class="form-control" name="password1" [(ngModel)]="model.password1" #password1="ngModel" required />
+        		    	<div *ngIf="model.password != model.password1" class="help-block">Contraseñas incorrectas</div>
+        		    	<div [hidden]="password1.valid || password1.pristine" class="mt-2 alert alert-danger"><i class="material-icons err">error</i>La contraseña es requerida</div>
+        			</div>	
+				</div>
+
+
+				<div class="col-12">
+					<div class="form-group d-flex justify-content-around">
+						
+						<label class="" for="tipo">Tipo de Usuario</label>
+						<select id="tipo" name = "tipo">
+						  <option [ngValue]="0" value = "0">Administrador</option>
+						  <option  [ngValue]="1" value ="1">Usuario</option>
+						</select>
+
+
+        			</div>	
+				</div>
+
+                <div class="col-12 d-flex justify-content-center">
+                    <div *ngIf="error" class="alert alert-danger col-11">
+                        <i class="material-icons err">error</i> El usuario ya se encuentra registrado 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span (click) ="cerrar()">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+
+
+                 <div class="col-12 d-flex justify-content-between mb-4">
+                    <button [disabled]="f.invalid || model.password != model.password1" type="submit" class="mb-3 btn btn-primary">Registrar</button>  
+                    <button (click)="refresh()" class="mb-3 btn btn-primary">Cancelar</button>  
+                </div> 
+    		</form>
+    	</div>
+		</div>
+	</div>
+</div>

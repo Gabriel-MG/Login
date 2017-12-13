@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+<style type="text/css" media="screen">
+
+label
+{
+	cursor: pointer;
+}
+
+.w-75
+{
+	cursor: pointer;
+}
+	
+</style>
+
+<div class="container mt-5">
+	<div class="row d-flex justify-content-between">
+		<div class="col-md-3  text-center mb-3">
+			<img id="front" name="front" (click)="control(1)" class="w-75" src="" alt="Foco Frontal">
+			<label for="front" (click)="control(1)"> Luz Frente</label>			
+		</div>
+		
+
+		<div class="col-md-3 text-center mb-3">
+			<img id="middle" name="middle" (click)="control(2)" class="w-75" src="" alt="Foco del Media">
+			<label (click)="control(2)" for="middle"> Luz Central</label>
+		</div>
+		
+
+
+		<div class="col-md-3 text-center mb-3">
+			<img name="back" (click)="control(3)" id="back" class="w-75" src="" alt="Foco Trasero">
+			<label for="back" (click)="control(3)"> Luz Trasera</label>
+		</div>	
+
+	
+
+	</div>
+</div>

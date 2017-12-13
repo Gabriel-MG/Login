@@ -1,28 +1,3 @@
-/*import { BrowserModule } 	from '@angular/platform-browser';
-import { NgModule } 		from '@angular/core';
-
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { AccordionModule } from 'ngx-bootstrap';
-
-import { Indexx } 			from './controler/index.component';
-import { AppComponent } 	from './controler/app.component';
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    Indexx
-  ],
-  imports: [
-    BsDropdownModule.forRoot(),
-    AccordionModule.forRoot(),
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule {
- }
-*/
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -34,10 +9,15 @@ import { routing } from './app.routing';
 import { customHttpProvider } from './_helpers/index';
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
-import { AlertService, AuthenticationService, UserService } from './_services/index';
+import { AlertService, AuthenticationService, UserService, ControlService } from './_services/index';
 import { HomeComponent } from './controler/home.component';
 import { LoginComponent } from './controler/login.component';
 import { RegisterComponent } from './controler/register.component';
+
+import { HeaderComponent } from './header/header.component';
+import { ControlComponent } from './control/control.component';
+import { RegistroComponent } from './registro/registro.component';
+import { NavbarComponent } from './navbar/navbar.component';
  
 @NgModule({
     imports: [
@@ -51,12 +31,17 @@ import { RegisterComponent } from './controler/register.component';
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        HeaderComponent,
+        ControlComponent,
+        RegistroComponent,
+        NavbarComponent
     ],
     providers: [
         customHttpProvider,
         AuthGuard,
         AlertService,
+        ControlService,
         AuthenticationService,
         UserService
     ],
